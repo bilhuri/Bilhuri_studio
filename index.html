@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilhuri Studio | Luxury Link Hub</title>
+    <meta name="description" content="Digital Creativity, Education, & Physical Assets by Bilhuri Studio.">
+    
+    <!-- GOOGLE FONTS IMPORT: Playfair Display (Serif) & Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* * DESIGN SYSTEM & VARIABLES
+         * Vibe: Ultra-Premium, Dark, Atmospheric
+         */
+        :root {
+            --bg-base: #050505;
+            --card-bg: rgba(17, 17, 17, 0.7); /* Slight transparency for glass feel */
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-heading: #f4f4f4; /* Off-white for elegance */
+            --text-body: #888888;
+            
+            --transition-speed: 0.4s;
+            
+            /* TYPOGRAPHY CONFIG */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* RESET & BASE STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            
+            /* DEEP ATMOSPHERIC GRADIENT IMPLEMENTATION */
+            /* Layer 1: Subtle cool dark blue glow top-left */
+            /* Layer 2: Subtle neutral dark grey glow bottom-right */
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(15, 23, 42, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(26, 26, 26, 0.5) 0%, transparent 40%);
+            
+            background-attachment: fixed; /* Ensures gradient stays while scrolling */
+            color: var(--text-heading);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 70px 20px 40px;
+        }
+
+        /* LAYOUT CONTAINER */
+        .container {
+            width: 100%;
+            max-width: 500px; /* Condensed luxury width */
+            margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Ensure content floats above background */
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 12px;
+            color: #fff;
+            font-style: italic; /* Signature luxury touch */
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Lift text off bg */
+        }
+
+        .subtitle {
+            font-family: var(--font-body);
+            color: var(--text-body);
+            font-size: 0.8rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.2em; /* Premium wide tracking */
+        }
+
+        /* ACCORDION (DETAILS/SUMMARY) STYLING */
+        details {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        details:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+
+        details[open] {
+            background-color: rgba(20, 20, 20, 0.9);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* The Clickable Header */
+        summary {
+            list-style: none;
+            padding: 24px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: #ccc;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:hover {
+            color: #fff;
+        }
+
+        /* Icon & Text Wrapper in Summary */
+        .summary-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .category-icon {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-body);
+            transition: stroke 0.3s ease;
+        }
+
+        details[open] summary .category-icon {
+            stroke: #fff;
+        }
+
+        /* Custom Plus Indicator */
+        .indicator {
+            position: relative;
+            width: 12px;
+            height: 12px;
+        }
+
+        .indicator::before, .indicator::after {
+            content: '';
+            position: absolute;
+            background-color: var(--text-body);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
+        }
+
+        .indicator::before { width: 12px; height: 1px; } 
+        .indicator::after { width: 1px; height: 12px; }
+
+        /* Rotate to X when open */
+        details[open] summary .indicator::before { transform: translate(-50%, -50%) rotate(135deg); background-color: #fff; }
+        details[open] summary .indicator::after { transform: translate(-50%, -50%) rotate(135deg); background-color: #fff; }
+
+        /* DROPDOWN CONTENT */
+        .dropdown-content {
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding: 10px 16px 24px 16px;
+            background-color: rgba(0,0,0,0.2);
+            
+            /* Animation Setup */
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+            display: none;
+        }
+
+        details[open] .dropdown-content {
+            display: block;
+            animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            pointer-events: auto;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-desc {
+            font-family: var(--font-heading);
+            font-style: italic;
+            padding: 0 8px 16px; 
+            font-size: 0.9rem; 
+            color: #666;
+            display: block;
+        }
+
+        /* LINK ITEMS */
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 12px;
+            text-decoration: none;
+            color: #999;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .link-item:hover:not(.locked) {
+            background-color: rgba(255,255,255,0.03);
+            color: #fff;
+            border-color: rgba(255,255,255,0.05);
+            padding-left: 16px;
+        }
+
+        .link-text {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        /* BADGES */
+        .badge {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .badge.live {
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .badge.soon { color: #555; border: 1px solid #333; }
+        .badge.early { color: #bbb; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .badge.locked { color: #444; border: 1px dashed #333; }
+
+        .link-item.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            padding-top: 80px;
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .copyright {
+            font-size: 0.7rem;
+            color: #444;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .social-link {
+            color: #444;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            color: #fff;
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); /* Glow effect on hover */
+        }
+
+        /* UTILS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Staggered Load */
+        details:nth-child(1) { animation: fadeIn 0.6s ease-out 0.2s backwards; }
+        details:nth-child(2) { animation: fadeIn 0.6s ease-out 0.3s backwards; }
+        details:nth-child(3) { animation: fadeIn 0.6s ease-out 0.4s backwards; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>BILHURI STUDIO</h1>
+            <p class="subtitle">Digital Creativity, Education, & Physical Assets.</p>
+        </header>
+
+        <!-- Main Menu -->
+        <main>
+            <!-- Card 1: Digital Creative -->
+            <details>
+                <summary>
+                    <div class="summary-content">
+                        <!-- Laptop Icon -->
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+                        <span>DIGITAL CREATIVE</span>
+                    </div>
+                    <div class="indicator"></div>
+                </summary>
+                <div class="dropdown-content">
+                    <span class="dropdown-desc">Assets for creators & developers.</span>
+                    
+                    <a href="https://bilhuri.gumroad.com" target="_blank" class="link-item">
+                        <span class="link-text">Gumroad Store</span>
+                        <span class="badge live">Live</span>
+                    </a>
+                    
+                    <a href="#" class="link-item locked">
+                        <span class="link-text">Web Templates</span>
+                        <span class="badge soon">Coming Soon</span>
+                    </a>
+                </div>
+            </details>
+
+            <!-- Card 2: Safe Haven -->
+            <details>
+                <summary>
+                    <div class="summary-content">
+                        <!-- Shield Icon -->
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span>SAFE HAVEN</span>
+                    </div>
+                    <div class="indicator"></div>
+                </summary>
+                <div class="dropdown-content">
+                    <span class="dropdown-desc">Secure assets for your future.</span>
+                    
+                    <a href="https://s.id/Perakin" target="_blank" class="link-item">
+                        <span class="link-text">Perakin</span>
+                        <span class="badge live">Live</span>
+                    </a>
+                    
+                    <a href="#" class="link-item locked">
+                        <span class="link-text">Emasin</span>
+                        <span class="badge locked">Locked</span>
+                    </a>
+                </div>
+            </details>
+
+            <!-- Card 3: Bilhuri Edu -->
+            <details>
+                <summary>
+                    <div class="summary-content">
+                        <!-- Graduation Cap Icon -->
+                        <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        <span>BILHURI EDU</span>
+                    </div>
+                    <div class="indicator"></div>
+                </summary>
+                <div class="dropdown-content">
+                    <span class="dropdown-desc">Upgrade your practical skills.</span>
+                    
+                    <a href="#" class="link-item">
+                        <span class="link-text">English with Bil</span>
+                        <span class="badge early">Early Access</span>
+                    </a>
+                    
+                    <a href="#" class="link-item locked">
+                        <span class="link-text">Teaching Tools</span>
+                        <span class="badge soon">Coming Soon</span>
+                    </a>
+                </div>
+            </details>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p class="copyright">Copyright © 2025 Bilhuri Studio.</p>
+            
+            <div class="social-icons">
+                <!-- Email Icon -->
+                <a href="mailto:bilhuri@gmail.com" class="social-link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+
+                <!-- GitHub Icon -->
+                <a href="https://github.com/bilhuri" target="_blank" class="social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+
+                <!-- X (Twitter) Icon -->
+                <a href="https://x.com/bilhuri" target="_blank" class="social-link" aria-label="X (Twitter)">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script: Exclusive Accordion Behavior -->
+    <script>
+        const details = document.querySelectorAll("details");
+
+        details.forEach((targetDetail) => {
+            targetDetail.addEventListener("click", () => {
+                details.forEach((detail) => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute("open");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
