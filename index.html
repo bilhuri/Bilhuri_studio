@@ -7,7 +7,6 @@
     <title>Bilhuri Studio | Luxury Link Hub</title>
     <meta name="description" content="Digital Creativity, Education, & Physical Assets by Bilhuri Studio.">
     
-    <!-- GOOGLE FONTS IMPORT: Playfair Display (Serif) & Inter (Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -17,11 +16,12 @@
          * Vibe: Ultra-Premium, Dark, Atmospheric
          */
         :root {
-            --bg-base: #050505;
+            --bg-base: #0A0A0A; /* Deeper Matte Black/Dove */
             --card-bg: rgba(17, 17, 17, 0.7); /* Slight transparency for glass feel */
             --card-border: rgba(255, 255, 255, 0.08);
             --text-heading: #f4f4f4; /* Off-white for elegance */
-            --text-body: #888888;
+            --text-body: #A0A0A0; /* Lighter gray for better contrast */
+            --color-live-dot: #34D399; /* Premium Green for Live Status */
             
             --transition-speed: 0.4s;
             
@@ -41,14 +41,14 @@
         body {
             background-color: var(--bg-base);
             
-            /* DEEP ATMOSPHERIC GRADIENT IMPLEMENTATION */
-            /* Layer 1: Subtle cool dark blue glow top-left */
-            /* Layer 2: Subtle neutral dark grey glow bottom-right */
+            /* DEEP ATMOSPHERIC GRADIENT IMPLEMENTATION (NOW: Premium Sunlight Flare) */
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(15, 23, 42, 0.6) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(26, 26, 26, 0.5) 0%, transparent 40%);
+                /* Warm, subtle gold flare from top-left (Sunlight) */
+                radial-gradient(circle at 10% 10%, rgba(255, 175, 0, 0.1) 0%, transparent 40%), 
+                /* Subtle, cool shadow from bottom-right */
+                radial-gradient(circle at 90% 90%, rgba(139, 69, 19, 0.05) 0%, transparent 40%); 
             
-            background-attachment: fixed; /* Ensures gradient stays while scrolling */
+            background-attachment: fixed;
             color: var(--text-heading);
             font-family: var(--font-body);
             line-height: 1.6;
@@ -62,10 +62,10 @@
         /* LAYOUT CONTAINER */
         .container {
             width: 100%;
-            max-width: 500px; /* Condensed luxury width */
+            max-width: 500px;
             margin: 0 auto;
             position: relative;
-            z-index: 1; /* Ensure content floats above background */
+            z-index: 1;
         }
 
         /* HEADER */
@@ -82,8 +82,8 @@
             letter-spacing: 0.02em;
             margin-bottom: 12px;
             color: #fff;
-            font-style: italic; /* Signature luxury touch */
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Lift text off bg */
+            font-style: italic;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .subtitle {
@@ -92,7 +92,7 @@
             font-size: 0.8rem;
             font-weight: 300;
             text-transform: uppercase;
-            letter-spacing: 0.2em; /* Premium wide tracking */
+            letter-spacing: 0.2em;
         }
 
         /* ACCORDION (DETAILS/SUMMARY) STYLING */
@@ -102,7 +102,7 @@
             border-radius: 8px;
             margin-bottom: 16px;
             overflow: hidden;
-            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
             transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -212,7 +212,7 @@
             font-style: italic;
             padding: 0 8px 16px; 
             font-size: 0.9rem; 
-            color: #666;
+            color: var(--text-body); /* FIXED: Improved contrast */
             display: block;
         }
 
@@ -255,7 +255,24 @@
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.05);
+            
+            /* NEW: Dot Alignment & Text Padding */
+            display: inline-flex;
+            align-items: center;
+            padding-left: 4px; /* Adjust padding to make space for the dot */
         }
+
+        /* NEW: Live Status Dot */
+        .badge.live::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-live-dot); /* Green dot */
+            border-radius: 50%;
+            margin-right: 5px; /* Space between dot and 'Live' text */
+            box-shadow: 0 0 4px var(--color-live-dot); /* Subtle glow */
+        }
+
 
         .badge.soon { color: #555; border: 1px solid #333; }
         .badge.early { color: #bbb; border: 1px solid rgba(255, 255, 255, 0.1); }
@@ -309,7 +326,7 @@
         .social-link:hover {
             color: #fff;
             transform: translateY(-2px);
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); /* Glow effect on hover */
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
         }
 
         /* UTILS */
@@ -328,19 +345,15 @@
 <body>
 
     <div class="container">
-        <!-- Header -->
         <header>
             <h1>BILHURI STUDIO</h1>
             <p class="subtitle">Digital Creativity, Education, & Physical Assets.</p>
         </header>
 
-        <!-- Main Menu -->
         <main>
-            <!-- Card 1: Digital Creative -->
             <details>
                 <summary>
                     <div class="summary-content">
-                        <!-- Laptop Icon -->
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="20" x2="22" y2="20"></line></svg>
                         <span>DIGITAL CREATIVE</span>
                     </div>
@@ -361,11 +374,9 @@
                 </div>
             </details>
 
-            <!-- Card 2: Safe Haven -->
             <details>
                 <summary>
                     <div class="summary-content">
-                        <!-- Shield Icon -->
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         <span>SAFE HAVEN</span>
                     </div>
@@ -386,11 +397,9 @@
                 </div>
             </details>
 
-            <!-- Card 3: Bilhuri Edu -->
             <details>
                 <summary>
                     <div class="summary-content">
-                        <!-- Graduation Cap Icon -->
                         <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
                         <span>BILHURI EDU</span>
                     </div>
@@ -399,9 +408,9 @@
                 <div class="dropdown-content">
                     <span class="dropdown-desc">Upgrade your practical skills.</span>
                     
-                    <a href="#" class="link-item">
+                    <a href="EnglishwithBil/index.html" class="link-item">
                         <span class="link-text">English with Bil</span>
-                        <span class="badge early">Early Access</span>
+                        <span class="badge live">Live</span>
                     </a>
                     
                     <a href="#" class="link-item locked">
@@ -412,26 +421,22 @@
             </details>
         </main>
 
-        <!-- Footer -->
         <footer>
             <p class="copyright">Copyright © 2026 Bilhuri Studio.</p>
             
             <div class="social-icons">
-                <!-- Email Icon -->
                 <a href="mailto:bilhuri@gmail.com" class="social-link" aria-label="Email">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                     </svg>
                 </a>
 
-                <!-- GitHub Icon -->
                 <a href="https://github.com/bilhuri" target="_blank" class="social-link" aria-label="GitHub">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </a>
 
-                <!-- X (Twitter) Icon -->
                 <a href="https://x.com/bilhuri" target="_blank" class="social-link" aria-label="X (Twitter)">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -441,7 +446,6 @@
         </footer>
     </div>
 
-    <!-- Script: Exclusive Accordion Behavior -->
     <script>
         const details = document.querySelectorAll("details");
 
@@ -458,4 +462,3 @@
 </body>
 
 </html>
-
